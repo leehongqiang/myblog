@@ -1,4 +1,4 @@
-# hq-blog
+# myblog
 个人博客
 
 本项目是基于node 和express开发的个人博客系统
