@@ -1,0 +1,75 @@
+<%- include header %>
+<div class="container">
+
+        <%if(!user){%>
+            <div>
+            <h2><a href="#"><%= post.title %></a></h2>
+            <p>
+                <a href="/u/<%= post.name %>"><img src="<%= post.head %>" class="r_head" width="24" height="24" style="border-radius: 12px;"/></a>
+                作者：<a href="/u/<%= post.name%>"><%= post.name%></a>|
+                时间：<%= post.time.minute%>
+
+                <% if(post.tags){%>
+                标签：
+                <% post.tags.forEach(function (tag,index) { %>
+                <%if(tag){%>
+                <a href="/tags/<%=tag%>"><%=tag%></a>
+                <%}%>
+                <%})%>
+                <%}%>
+            </p>
+                <div>
+                    <%- post.post%>
+                </div>
+                <span>阅读：<%=post.pv%></span>
+                <!--<% if (post.comments){%>-->
+                <!--<span>|评论:<%=post.comments.length%></span>-->
+                <!--<%}else {%>-->
+                <!--<span>|评论:0</span>-->
+                <%}%>
+            </div>
+                <hr/>
+    <!--高速版-->
+    <div id="SOHUCS"></div>
+    <script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
+    <script type="text/javascript">
+        window.changyan.api.config({
+            appid: 'cyskFJqUw',
+            conf: 'prod_e3833ede08caa7ad062442facd332875'
+        });
+    </script>
+
+    <%}else{%>
+            <div>
+            <h2><a href="#"><%= post.title %></a></h2>
+            <p>
+                <a href="/u/<%= post.name %>"><img src="<%= post.head %>" class="r_head" width="24" height="24" style="border-radius: 12px;"/></a>
+                作者：<a href="/u/<%= post.name%>"><%= post.name%></a>|
+                时间：<%= post.time.minute%>
+                <% if(post.tags){%>
+                    标签：
+                    <% post.tags.forEach(function (tag,index) { %>
+                        <%if(tag){%>
+                        <a href="/tags/<%=tag%>"><%=tag%></a>
+                        <%}%>
+                    <%})%><%}%>
+                <% if(user && post.name == user.name){%>
+                    <a class="btn btn-primary btn-sm" href="/edit/<%= post.name%>/<%= post.time.day%>/<%= post.title%>">编辑</a>
+                    <a class="btn btn-danger btn-sm" href="/remove/<%= post.name%>/<%= post.time.day%>/<%= post.title%>">删除</a>
+                <% } %>
+            </p>
+
+                <div class="text-info">
+                    <%- post.post%>
+                </div>
+                <span>阅读：<%=post.pv%></span>
+
+            </div>
+                <%- include comment%>
+            <%}%>
+
+</div>
+
+<%- include footer %>
+
+

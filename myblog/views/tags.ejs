@@ -1,0 +1,20 @@
+<%- include header%>
+<%
+//随机颜色
+    function randomColor(){
+        var r = Math.floor(Math.random()*256);
+        var g = Math.floor(Math.random()*256);
+        var b = Math.floor(Math.random()*256);
+        return "rgb("+r+","+g+","+b+")";
+    };
+    console.log(randomColor());
+%>
+<div class="container">
+    <%posts.forEach(function (tag,index) {%>
+        <%if(tag!=''){%>
+        <a class="btn btn-lg" style="background:<%=randomColor()%>;color: #000;font-weight: bold;box-shadow: 0px 0px 10px 0px;"  href="/tags/<%=tag%>"><%=tag%></a>
+        <%}%>
+    <%})%>
+</div>
+
+<%- include footer%>
